@@ -1,2 +1,5 @@
 #!/bin/bash
 *~
+__pycache__/*.pyc
+django_fun/__pycache__/*
+django_fun/django_fun/__pycache__/*
