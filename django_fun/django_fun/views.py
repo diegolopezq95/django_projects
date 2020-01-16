@@ -1,5 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+
+
 
 def index(request):
     return render(request,'index.html', {
@@ -12,13 +16,17 @@ def index(request):
         ]
     })
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username') #diccionario
         password = request.POST.get('password')
 
-        print('username')
-        print('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user) #to generate session for an user
+            print('User authenticated')
+        else:
+            print('User not authenticated')
     return render(request, 'users/login.html', {
 
     })
