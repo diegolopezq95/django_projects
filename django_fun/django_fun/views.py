@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib import messages
 
 
@@ -28,7 +29,14 @@ def login_view(request):
             messages.success(request, 'Welcome {}'.format(user.username))
             return redirect('index')
         else:
+
+
             messages.error(request, 'User or password not valid')
     return render(request, 'users/login.html', {
 
     })
+
+def logout_view(request):
+        logout(request)
+        messages.success(request, 'session closed successfully')
+        return redirect('login')
