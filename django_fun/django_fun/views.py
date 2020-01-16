@@ -1,5 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 
@@ -25,8 +25,7 @@ def login_view(request):
         if user:
             login(request, user) #to generate session for an user
             print('User authenticated')
-        else:
-            print('User not authenticated')
+            return redirect('index')
     return render(request, 'users/login.html', {
 
     })
