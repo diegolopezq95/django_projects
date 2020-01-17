@@ -19,6 +19,11 @@ class RegisterForm(forms.Form):
                                 widget=forms.PasswordInput(attrs={
                                     'class': 'form-control',
                                 }))
+    password2 = forms.CharField(label='Confirm password',
+                                required=True,
+                                widget=forms.PasswordInput(attrs={
+                                    'class': 'form-control',
+                                }))
 
     def clean_username(self): #validating user
         username = self.cleaned_data.get('username')
@@ -31,3 +36,16 @@ class RegisterForm(forms.Form):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Email is already in use')
         return email
+
+    def clean(self): #validate passwords are the same
+        cleaned_data = super().clean()
+
+        if cleaned_data.get('password') != cleaned_data.get('password2'):
+            self.add_error('password2', 'The password does not match')
+
+    def save(self):
+        return User.objects.create_user( #return object of type user (create new user)
+            self.cleaned_data.get('username'),
+            self.cleaned_data.get('email'),
+            self.cleaned_data.get('password')
+        )
