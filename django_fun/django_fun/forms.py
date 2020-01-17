@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(required=True,
@@ -17,3 +19,15 @@ class RegisterForm(forms.Form):
                                 widget=forms.PasswordInput(attrs={
                                     'class': 'form-control',
                                 }))
+
+    def clean_username(self): #validating user
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError('Username is already in use')
+        return username
+
+    def clean_email(self): #validating email
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email is already in use')
+        return email
