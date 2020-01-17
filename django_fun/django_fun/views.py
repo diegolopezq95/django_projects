@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import RegisterForm
 
@@ -48,9 +49,13 @@ def register(request):
         username = form.cleaned_data.get('username') #Diccionario
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
-        print(username)
-        print(email)
-        print(password)
+
+        user = User.objects.create_user(username, email, password)
+        if user:
+            login(request, user)
+            messages.success(request, 'User created successfully')
+            return redirect('index')
+
     return render(request, 'users/register.html', {
         'form': form
     })

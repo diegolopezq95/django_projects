@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Register</title>
+    <title>Registry</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   </head>
   <body>
@@ -14,7 +14,7 @@
           <!---- Formulario ----->
           <form method="POST">
             {% csrf_token %}
-
+            <!--
             <div class="form-group">
               {{ form.username.label_tag }}
               {{ form.username }}
@@ -27,6 +27,15 @@
               {{ form.password.label_tag }}
               {{ form.password }}
             </div>
+            -->
+
+            {% for field in form %}
+            <div class="form-group">
+              {{ field.label_tag }}
+              {{ field }}
+            </div>
+            {% endfor %}
+            
             <button type="submit" class="btn btn-primary">Register</button>
           </form>
         </div>

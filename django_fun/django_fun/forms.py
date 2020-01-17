@@ -6,17 +6,14 @@ class RegisterForm(forms.Form):
                                 widget=forms.TextInput(attrs={
                                     'class': 'form-control',
                                     'id': 'username',
-                                    'placeholder': 'Username'
                                 }))
     email = forms.EmailField(required=True,
-                              widget=forms.EmailInput(attrs={
-                                  'class': 'form-control',
-                                  'id': 'email',
-                                  'placeholder': 'example@holbertonschool.com'
+                                widget=forms.EmailInput(attrs={
+                                    'class': 'form-control',
+                                    'id': 'email',
+                                    'placeholder': 'example@holbertonschool.com'
                                 }))
     password = forms.CharField(required=True,
                                 widget=forms.PasswordInput(attrs={
                                     'class': 'form-control',
-                                    'id': 'password',
-                                    'placeholder': 'Password'
-                                  }))
+                                }))
