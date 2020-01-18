@@ -1,50 +1,41 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Registry</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h2>Register</h2>
+{% extends 'base.html' %}
 
-          <!---- Formulario ----->
-          <form method="POST">
-            {% csrf_token %}
-            <!--
-            <div class="form-group">
-              {{ form.username.label_tag }}
-              {{ form.username }}
-            </div>
-            <div class="form-group">
-              {{ form.email.label_tag }}
-              {{ form.email }}
-            </div>
-            <div class="form-group">
-              {{ form.password.label_tag }}
-              {{ form.password }}
-            </div>
-            -->
+{% block content %}
 
-            {% for field in form %}
-            <div class="form-group">
-              {{ field.label_tag }}
-              {{ field }}
+<div class="col">
+  <h2>Register</h2>
 
-              {% if field.errors %}
-                {{ field.errors }}
-              {% endif %}
-            </div>
-            {% endfor %}
-
-            <button type="submit" class="btn btn-primary">Register</button>
-          </form>
-        </div>
-
-      </div>
+  <!-- Formulario ----->
+  <form method="POST">
+    {% csrf_token %}
+    <!--
+    <div class="form-group">
+      {{ form.username.label_tag }}
+      {{ form.username }}
     </div>
-  </body>
-</html>
+    <div class="form-group">
+      {{ form.email.label_tag }}
+      {{ form.email }}
+    </div>
+    <div class="form-group">
+      {{ form.password.label_tag }}
+      {{ form.password }}
+    </div>
+    -->
+
+    {% for field in form %}
+    <div class="form-group">
+      {{ field.label_tag }}
+      {{ field }}
+
+      {% if field.errors %}
+        {{ field.errors }}
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>
+
+{% endblock %}
