@@ -6,22 +6,20 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import RegisterForm
+from products.models import Product
 
 def index(request):
+    products = Product.objects.all().order_by('-id')
     return render(request,'index.html', {
         'message': 'Listado de productos',
         'title': 'Productos',
-        'products': [
-            {'title': 'Playera', 'price': 5, 'stock': True},
-            {'title': 'Camisa', 'price': 4, 'stock': True},
-            {'title': 'Mochila', 'price': 20, 'stock': False},
-        ]
+        'products': products
     })
 
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('index')
-        
+
     if request.method == 'POST':
         username = request.POST.get('username') #diccionario
         password = request.POST.get('password')
