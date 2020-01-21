@@ -23,3 +23,19 @@ class ProductDetailView(DetailView): #id -> pk
 
         print(context)
         return context
+
+class ProductSearchListView(ListView):
+    template_name = 'products/search.html'
+
+    def get_queryset(self):
+        #SELCT * FROM products WHERE title like %valor%
+        return Product.objects.filter(title__icontains=self.query())
+
+    def query(self):
+        return self.request.GET.get('q')
+
+    def get_context_data(self, **kwargs): #contexto de la clase al template
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.query()
+        context['count'] = context['product_list'].count()
+        return context

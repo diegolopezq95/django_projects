@@ -4,12 +4,7 @@
 
 <div class="col">
   <h4 class="text-center"> {{ message }}</h4>
-    <div class="row">
-      {% for key in products %}
-        <div class="col-3 mt-5">
-          {% include 'products/snippets/product.html' with key=key%}
-        </div>
-      {% endfor %}
-    </div>
+  {% include 'products/snippets/search.html' %}
+  {% include 'products/snippets/list.html' %}
 </div>
 {% endblock %}
