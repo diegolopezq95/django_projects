@@ -7,18 +7,7 @@
     <div class="row">
       {% for key in products %}
         <div class="col-3 mt-5">
-          <!-- Product --->
-          <div class="card h-100">
-
-            {% if key.image %}
-              <img src="{{ key.image.url }}" alt="Imagen del producto" height="200">
-            {% endif %}
-            <div class="card-body">
-              <h5 class="card-title"> {{ key.title }} </h5>
-              <p class="card-text"> {{ key.description}} </p>
-              <a href="#" class="btn btn-primary">Ver más</a>
-            </div>
-          </div>
+          {% include 'products/snippets/product.html' with key=key%}
         </div>
       {% endfor %}
     </div>
